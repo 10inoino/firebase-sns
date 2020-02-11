@@ -1,3 +1,4 @@
+// 画面遷移時に実行
 $(document).ready( function(){
     firebase.auth().onAuthStateChanged(user => {
         console.log(user);
@@ -12,10 +13,12 @@ $(document).ready( function(){
 
 var provider = new firebase.auth.GoogleAuthProvider();
 
+// firebaseの初期化
 firebase.initializeApp(config);
 
 var rootRef = firebase.database().ref();
 
+// テキストエリアでエンターキーを押した時
 $('#msgIn').keypress(function (e) {
     if (e.keyCode == 13) {
         var name = $('#nameIn').val();
@@ -25,17 +28,20 @@ $('#msgIn').keypress(function (e) {
     }
 });
 
+// DBにレコードが追加された時に走る
 rootRef.on('child_added', function (ss) {
     var msgKey = ss.key;
     var msg = ss.val();
     dspChatMsg(msg.name, msg.text, msg.like, msgKey);
 });
 
+// DBのレコードが削除された時に走る
 rootRef.on('child_removed', function (ss) {
     var msgKey = ss.key;
     $("#" + msgKey).remove();
 });
 
+// DBのレコードが変更された時に走る
 rootRef.on('child_changed', function (ss) {
     var msgKey = ss.key;
     var msg = ss.val();
@@ -43,6 +49,7 @@ rootRef.on('child_changed', function (ss) {
     $("#" + msgKey).find('.like').data("like", msg.like);    
 });
 
+// メッセージを画面に表示させる
 function dspChatMsg(name, text, like, key) {
     var chatMsgDom = generateMsgDom(name, text, like, key);
     $(chatMsgDom).appendTo($('#msgDiv'));
@@ -50,6 +57,7 @@ function dspChatMsg(name, text, like, key) {
     attachEvent();
 };
 
+// 削除ボタン、LIKEボタンにイベント付与
 function attachEvent(){
     $('.delete').off();
     $('.like').off();
@@ -79,10 +87,12 @@ function attachEvent(){
     });
 }
 
+// ログインボタンを押したらGoogle認証が走る
 $("#login").on("click", function(){
     firebase.auth().signInWithRedirect(provider);
 });
 
+// ログアウト
 $("#logout").on("click", function(){
     firebase.auth().signOut().then(()=>{
         alert("ログアウトしました");
@@ -95,6 +105,7 @@ $("#logout").on("click", function(){
     });
 });
 
+// DOMを生成する
 function generateMsgDom(name, text, like, key){
     var dom = "<div class='col-md-4 px-2 my-3' id='" + key + "'>"+
                     "<div class='card'>"+
@@ -112,6 +123,7 @@ function generateMsgDom(name, text, like, key){
                                     "</button>"+
                                 "</div>";
 
+    // 自分の名前と一緒だったら削除ボタンをつける
     if (name == $('#nameIn').val()) {
                     dom = dom + "<div class='col-auto'>"+
                                     "<button class='btn btn-primary delete' value='" + key + "'>"+
