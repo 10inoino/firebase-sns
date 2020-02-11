@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Line</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <!-- <link rel="stylesheet" href="../css/style.css"> -->
+        <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    </head>
+    <body>
+        <input type="hidden" id="nameIn" value="guest">
+        <div class="p-3 sticky-top bg-white">
+            <div class="row">
+                <div class="col">
+                    <h2>Firebase SNS</h2>
+                </div>
+                <div class="col text-right">
+                    <input type="button" class="btn btn-primary" id="login" value="Login">
+                    <input type="button" class="btn btn-primary d-none" id="logout" value="Logout">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="text" id="msgIn" class="form-control" placeholder="メッセージを入れてくださいな" value="" required="required" pattern="" title="" disabled>
+                </div>
+            </div>
+        </div>
+    
+        <main>
+            <div class="container">
+                <div class="row" id="msgDiv"></div>
+                <br class="clear_balloon" />
+                <div id="bottomDiv"></div>
+            </div>
+        </main>
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/init.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
+
+        <script src="../js/jquery-3.4.1.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/api_key.js.js"></script>
+        <script src="../js/app.js"></script>
+    </body>
+</html>
