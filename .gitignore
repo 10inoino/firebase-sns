@@ -64,4 +64,4 @@ node_modules/
 # dotenv environment variables file
 .env
 
-/public/practice1/js/api_key.js
+api_key.js
